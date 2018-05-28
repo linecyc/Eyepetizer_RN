@@ -1,0 +1,3 @@
+rootProject.name = 'Eyepetizer_RN'
+
+include ':app'

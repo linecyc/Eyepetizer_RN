@@ -1,0 +1,9 @@
+{
+  "name": "Eyepetizer",
+  "version": "0.0.1",
+  "dependencies": {
+    "react": "^16.4.0",
+    "react-native": "^0.55.4",
+    "react-navigation": "^2.0.4"
+  }
+}
