@@ -1,15 +1,16 @@
 import React from "react";
 import {AppRegistry, YellowBox, StyleSheet, Image} from 'react-native';
 import {createBottomTabNavigator} from 'react-navigation';
-import Home from './view/Home';
-import BannerTest from "./view/Home";
+import HomePage from './view/HomePage';
+import ProfilePage from './view/ProfilePage';
 import Demo from "./view/Demo";
+import NotifyPage from "./view/NotifyPage";
 
 YellowBox.ignoreWarnings(['Warning: isMounted(...) is deprecated', 'Module RCTImageLoader']);
 
 const Eyepetizer = createBottomTabNavigator({
     Home: {
-        screen: Home,
+        screen: HomePage,
         navigationOptions: {
             tabBarLabel: '首页',
             tabBarIcon: ({focused, tintColor}) => (
@@ -36,7 +37,7 @@ const Eyepetizer = createBottomTabNavigator({
         }
     },
     Notify: {
-        screen: Demo,
+        screen: NotifyPage,
         navigationOptions: {
             tabBarLabel: '通知',
             tabBarIcon: ({focused, tintColor}) => (
@@ -49,7 +50,7 @@ const Eyepetizer = createBottomTabNavigator({
         }
     },
     My: {
-        screen: BannerTest,
+        screen: ProfilePage,
         navigationOptions: {
             tabBarLabel: '我的',
             tabBarIcon: ({focused, tintColor}) => (
@@ -79,7 +80,7 @@ const Eyepetizer = createBottomTabNavigator({
             // height: 44
         },
         labelStyle: {
-            fontSize: 10, // 文字大小
+            fontSize: 14, // 文字大小
             // flex: 1,
             // justifyContent: 'center',
         },
