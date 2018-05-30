@@ -7,15 +7,16 @@ import {
 import {
     createMaterialTopTabNavigator
 } from 'react-navigation';
-import Demo from "./Demo";
+import NotifyOfficialListPage from "./NotifyOfficialListPage";
+import NotifyOtherListPage from "./NotifyOtherListPage";
 
 
 /**
- *
+ *This  is base notify page for navigator.
  * @author by linecy.
  */
 
-export default class  extends Component {
+export default class NotifyPage extends Component {
 
     render() {
         return (<View style={styles.container}>
@@ -31,13 +32,13 @@ export default class  extends Component {
 
 const routeConfigs = {
     Official: {
-        screen: Demo,
+        screen: NotifyOfficialListPage,
         navigationOptions: ({navigation}) => ({
             tabBarLabel: '官方',
         })
     },
     Other: {
-        screen: Demo,
+        screen: NotifyOtherListPage,
         navigationOptions: ({navigation}) => ({
             tabBarLabel: '互动',
         })
@@ -58,6 +59,7 @@ const navConfigs = {
         },
         labelStyle: {
             fontSize: 14,
+            fontWeight: 'bold',
         },
     },
 };
