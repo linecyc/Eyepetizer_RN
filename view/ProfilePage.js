@@ -71,7 +71,7 @@ const styles = {
             borderRadius: 45,
             //borderColor:'#666',
             //borderWidth:1,
-            resizeMode:'stretch',
+            resizeMode:'cover',
         },
         userName: {
             color: '#333',

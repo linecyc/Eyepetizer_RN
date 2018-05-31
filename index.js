@@ -5,6 +5,7 @@ import HomePage from './view/HomePage';
 import ProfilePage from './view/ProfilePage';
 import Demo from "./view/Demo";
 import NotifyPage from "./view/NotifyPage";
+import FocusPage from "./view/FocusPage";
 
 YellowBox.ignoreWarnings(['Warning: isMounted(...) is deprecated', 'Module RCTImageLoader']);
 
@@ -24,7 +25,7 @@ const Eyepetizer = createBottomTabNavigator({
 
     },
     Focus: {
-        screen: Demo,
+        screen: FocusPage,
         navigationOptions: {
             tabBarLabel: '关注',
             tabBarIcon: ({focused, tintColor}) => (
