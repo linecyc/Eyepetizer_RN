@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
-import Navigation from './navigation/Navigation';
-import Demo from "./Demo";
+import Navigation from '../../navigation/Navigation';
+import Demo from "../Demo";
 
 /**
  *

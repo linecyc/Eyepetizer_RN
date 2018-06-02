@@ -85,7 +85,7 @@ export default class Navigate extends Component {
             case NavigatorStyle.NO_CONTAINER_UP:
                 Up = null;
                 Down = () => {
-                    return (<Image style={styles.search} source={require('../img/ic_action_search.png')}/>);
+                    return (<Image style={styles.search} source={require('../../img/ic_action_search.png')}/>);
                 };
                 break;
 
@@ -94,7 +94,7 @@ export default class Navigate extends Component {
 
                 Up = () => {
                     return (textNull ?
-                        <Image style={styles.back} source={require('../img/ic_action_back.png')}/> :
+                        <Image style={styles.back} source={require('../../img/ic_action_back.png')}/> :
                         <Text style={styles.backText} numberOfLines={1}>{this.backText}</Text>);
                 };
                 Down = null;
@@ -110,11 +110,11 @@ export default class Navigate extends Component {
 
                 Up = () => {
                     return (textNull2 ?
-                        <Image style={styles.back} source={require('../img/ic_action_back.png')}/> :
+                        <Image style={styles.back} source={require('../../img/ic_action_back.png')}/> :
                         <Text style={styles.backText} numberOfLines={1}>{this.backText}</Text>);
                 };
                 Down = () => {
-                    return (<Image style={styles.search} source={require('../img/ic_action_search.png')}/>);
+                    return (<Image style={styles.search} source={require('../../img/ic_action_search.png')}/>);
                 };
 
                 break;

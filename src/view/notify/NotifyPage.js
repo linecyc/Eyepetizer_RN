@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import NotifyOfficialListPage from "./NotifyOfficialListPage";
 import NotifyOtherListPage from "./NotifyOtherListPage";
-import Navigation from './navigation/Navigation';
+import Navigation from '../../navigation/Navigation';
 
 /**
  *This  is base notify page for navigation.

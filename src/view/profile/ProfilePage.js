@@ -13,18 +13,18 @@ export default class ProfilePage extends Component {
         return (
             <View style={styles.container}>
                 <View style={styles.header}>
-                    <Image style={styles.menu} source={require('./img/ic_menu_more.png')}/>
-                    <Image style={styles.avatar} source={require('./img/ic_avatar.jpg')}/>
+                    <Image style={styles.menu} source={require('../../../img/ic_menu_more.png')}/>
+                    <Image style={styles.avatar} source={require('../../../img/ic_avatar.jpg')}/>
                     <Text style={styles.userName}>小明与小花</Text>
                     <Text>查看个人主页 ></Text>
                     <View style={styles.horizontal}>
                         <View style={styles.horizontalControl}>
-                            <Image style={styles.menu} source={require('./img/ic_grey_heart.png')}/>
+                            <Image style={styles.menu} source={require('../../../img/ic_grey_heart.png')}/>
                             <Text>喜欢</Text>
                         </View>
                         <Text style={styles.divider}>|</Text>
                         <View style={styles.horizontalControl}>
-                            <Image style={styles.menu} source={require('./img/menu_download_icon.png')}/>
+                            <Image style={styles.menu} source={require('../../../img/menu_download_icon.png')}/>
                             <Text>缓存</Text>
                         </View>
 

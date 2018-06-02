@@ -1,15 +1,14 @@
-import React, {Component, PureComponent} from 'react';
+import React, {PureComponent} from 'react';
 import {
     Text,
     View,
     Image,
-    TouchableHighlight,
     FlatList,
     ActivityIndicator
 } from 'react-native';
 
-import officialData from '../mock_data_source/official';
-import officialData2 from '../mock_data_source/official2';
+import officialData from '../../../mock_data_source/official';
+import officialData2 from '../../../mock_data_source/official2';
 
 /**
  *
@@ -199,12 +198,12 @@ class OfficialItem extends PureComponent {
         return (
             <View style={styles.container}>
                 <View style={styles.horizontal}>
-                    <Image style={styles.avatarStyle} source={require('./img/ic_eyepetizer.png')}/>
+                    <Image style={styles.avatarStyle} source={require('../../../img/ic_eyepetizer.png')}/>
                     <View style={styles.titleBarStyle}>
                         <Text style={styles.titleStyle}>{this.offItem.name}</Text>
                         <Text style={styles.timeStyle}>{this.offItem.pushTime}</Text>
                     </View>
-                    <Image style={styles.arrowStyle} source={require('./img/ic_action_more_arrow_dark.png')}/>
+                    <Image style={styles.arrowStyle} source={require('../../../img/ic_action_more_arrow_dark.png')}/>
                 </View>
                 <Text
                     style={styles.detailStyle}>{this.offItem.details}</Text>

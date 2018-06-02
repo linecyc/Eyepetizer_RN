@@ -1,11 +1,10 @@
 import React from "react";
-import {AppRegistry, YellowBox, StyleSheet, Image} from 'react-native';
+import {AppRegistry, YellowBox, Image} from 'react-native';
 import {createBottomTabNavigator} from 'react-navigation';
-import HomePage from './view/HomePage';
-import ProfilePage from './view/ProfilePage';
-import Demo from "./view/Demo";
-import NotifyPage from "./view/NotifyPage";
-import FocusPage from "./view/FocusPage";
+import HomePage from './src/view/home/HomePage';
+import ProfilePage from './src/view/profile/ProfilePage';
+import NotifyPage from "./src/view/notify/NotifyPage";
+import FocusPage from "./src/view/focus/FocusPage";
 
 YellowBox.ignoreWarnings(['Warning: isMounted(...) is deprecated', 'Module RCTImageLoader']);
 
