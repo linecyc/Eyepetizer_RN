@@ -3,9 +3,9 @@ import {
     Text,
     View,
     Image,
-    FlatList,
     ActivityIndicator,
     SectionList,
+    ViewPagerAndroid,
 } from 'react-native'
 import Swiper from 'react-native-swiper'
 import SystemUtils from '../../utils/SystemUtils';
@@ -25,14 +25,11 @@ const styles = {
         backgroundColor: '#EAEAEA',
         justifyContent: 'center'
     },
-    wrapper: {
-        height: 230,
-    },
     header: {
         backgroundColor: '#fff',
-        paddingLeft: 16,
+        paddingLeft: 20,
         paddingTop: 32,
-        paddingBottom: 16,
+        paddingBottom: 6,
     },
     headerDay: {
         fontSize: 16,
@@ -67,7 +64,13 @@ const styles = {
         alignSelf: 'flex-start',
     },
 
-
+    banner: {
+        flex: 1,
+        paddingLeft: 14,
+        paddingRight: 14,
+        //backgroundColor: '#fff',
+        //justifyContent: 'center'
+    },
 };
 
 const baseUrl = 'http://baobab.kaiyanapp.com/api/v4/tabs/selected';
@@ -89,9 +92,15 @@ export default class RecommendPage extends Component {
         ;
     }
 
+    /**
+     * ViewPagerAndroid 设置pageMargin属性时，如果设置backgroundColor,justifyContent等属性会导致轮播页面被压缩？？
+     *
+     * @returns {*}
+     * @private
+     */
     _renderHeader = () => {
         return (
-            <View>
+            <View style={styles.container}>
                 <View style={styles.header}>
                     <Text style={styles.headerDay}>MONDAY. MAY 28</Text>
                     <View style={styles.horizontal}>
@@ -99,7 +108,8 @@ export default class RecommendPage extends Component {
                         <Image style={styles.arrow} source={require('../../../img/ic_action_more_arrow_dark.png')}/>
                     </View>
                 </View>
-                <Swiper style={styles.wrapper}
+                <Swiper style={{height: 230,flex:1}}
+                        pageMargin={-20}
                     /*onMomentumScrollEnd={(e, state, context) => console.log('index:', state.index)}*/
                         dot={<View style={styles.dotStyle}/>}
                         activeDot={<View style={styles.activityDotStyle}/>}
@@ -108,15 +118,13 @@ export default class RecommendPage extends Component {
                         }} autoplay={true} loop={true}>
                     {this.state.headerArray.map(this._renderBannerItem)}
                 </Swiper>
-                <View{{flex: 1, height: 1, paddingTop: 16, backgroundColor: '#999'}}/>
             </View>
         );
 
     };
-
     _renderBannerItem(item, index) {
         return (
-            <View key={index} style={{backgroundColor: '#fff', flex: 1, justifyContent: 'center', padding: 16}}>
+            <View key={index} style={styles.banner}>
                 <Image style={styles.imageCover} source={{uri: item.data.cover.feed}}/>
                 <View style={{
                     flexDirection: 'row',
@@ -144,9 +152,9 @@ export default class RecommendPage extends Component {
     }
 
     _renderSectionHeader(item) {
-        console.info(item);
         return (
-            <View style={{backgroundColor: '#fff', flex: 1, justifyContent: 'center', padding: 16}}>
+            <View style={{backgroundColor: '#fff', flex: 1, justifyContent: 'center', padding: 20}}>
+                <View style={{flex: 1, height: 0.5,marginBottom:32, backgroundColor: '#EAEAEA'}}/>
                 <View style={[styles.horizontal, {paddingBottom: 16}]}>
                     <Text style={{
                         fontSize: 16,
@@ -213,7 +221,14 @@ export default class RecommendPage extends Component {
     _errorComponent = () => {
         return (
             <View style={styles.emptyDataStyle}>
-                <Text>数据加载异常</Text>
+                <Text style={{
+                          padding: 20,
+                          fontWeight: 'bold',
+                          color: '#333',
+                          fontSize: 13,
+                          textAlign: 'center',
+                          alignSelf: 'center'
+                      }}>数据加载异常</Text>
             </View>);
     };
     _dataComponent = () => {
@@ -245,8 +260,8 @@ export default class RecommendPage extends Component {
                     flexDirection: 'row',
                     backgroundColor: '#fff',
                     flex: 1,
-                    paddingLeft: 16,
-                    paddingRight: 16,
+                    paddingLeft: 20,
+                    paddingRight: 20,
                     paddingTop: 6,
                     paddingBottom: 6,
                 }}>
@@ -268,7 +283,6 @@ export default class RecommendPage extends Component {
                               color: '#333',
                               fontWeight: 'bold',
                               flex:1,
-                              alignSelf:'flex-start'
                           }}>{item.data.title}</Text>
                     <View style={{
                         flexDirection: 'row',
@@ -350,5 +364,9 @@ export default class RecommendPage extends Component {
         } else {
             return this._dataComponent();
         }
+    }
+
+    _onItemClick(item){
+
     }
 }
