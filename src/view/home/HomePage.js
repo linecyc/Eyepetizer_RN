@@ -150,7 +150,7 @@ export default class HomePage extends Component {
                         <HomeEmptyPage title={homeTopTabs[0]}/>
                     </View>
                     <View>
-                        <RecommendPage/>
+                        <RecommendPage navigator={this.props.navigation}/>
                     </View>
                     <View>
                         <HomeEmptyPage title={homeTopTabs[2]}/>

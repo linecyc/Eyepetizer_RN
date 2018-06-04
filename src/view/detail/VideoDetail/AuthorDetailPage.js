@@ -10,7 +10,7 @@ import {
  * @author by linecy.
  */
 
-export default class VideoDetailPage extends Component {
+export default class AuthorDetailPage extends Component {
 
     constructor(props) {
         super(props);

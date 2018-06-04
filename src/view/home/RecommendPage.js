@@ -6,6 +6,7 @@ import {
     ActivityIndicator,
     SectionList,
     ViewPagerAndroid,
+    TouchableWithoutFeedback,
 } from 'react-native'
 import Swiper from 'react-native-swiper'
 import SystemUtils from '../../utils/SystemUtils';
@@ -13,7 +14,8 @@ import SystemUtils from '../../utils/SystemUtils';
 
 const styles = {
     container: {
-        flex: 1
+        flex: 1,
+        backgroundColor: '#fff',
     },
     horizontal: {
         flexDirection: 'row',
@@ -108,7 +110,7 @@ export default class RecommendPage extends Component {
                         <Image style={styles.arrow} source={require('../../../img/ic_action_more_arrow_dark.png')}/>
                     </View>
                 </View>
-                <Swiper style={{height: 230,flex:1}}
+                <Swiper style={{height: 230, flex: 1}}
                         pageMargin={-20}
                     /*onMomentumScrollEnd={(e, state, context) => console.log('index:', state.index)}*/
                         dot={<View style={styles.dotStyle}/>}
@@ -116,37 +118,42 @@ export default class RecommendPage extends Component {
                         paginationStyle={{
                             top: 180, bottom: null,
                         }} autoplay={true} loop={true}>
-                    {this.state.headerArray.map(this._renderBannerItem)}
+                    {this.state.headerArray.map(this._renderBannerItem.bind(this))}
                 </Swiper>
             </View>
         );
 
     };
+
     _renderBannerItem(item, index) {
         return (
             <View key={index} style={styles.banner}>
-                <Image style={styles.imageCover} source={{uri: item.data.cover.feed}}/>
-                <View style={{
-                    flexDirection: 'row',
-                    alignItems: 'center',
-                    paddingTop: 8,
-                }}>
-                    <Image style={styles.avatar} source={{uri: item.data.author.icon}}/>
-                    <View style={{alignItems: 'flex-start', flex: 1, paddingLeft: 6,}}>
-                        <Text style={{
-                            fontSize: 13,
-                            color: '#333',
-                            fontWeight: 'bold',
-                            textAlign: 'center'
-                        }}>{item.data.title}</Text>
-                        <Text style={{fontSize: 10, color: '#999', textAlign: 'center'}}>{item.data.slogan}</Text>
+                <TouchableWithoutFeedback onPress={() => this._onVideoItemClick(item)}>
+                    <Image style={styles.imageCover} source={{uri: item.data.cover.feed}}/>
+                </TouchableWithoutFeedback>
+                <TouchableWithoutFeedback onPress={() => this._onAuthorItemClick(item)}>
+                    <View style={{
+                        flexDirection: 'row',
+                        alignItems: 'center',
+                        paddingTop: 8,
+                    }}>
+                        <Image style={styles.avatar} source={{uri: item.data.author.icon}}/>
+                        <View style={{alignItems: 'flex-start', flex: 1, paddingLeft: 6,}}>
+                            <Text style={{
+                                fontSize: 13,
+                                color: '#333',
+                                fontWeight: 'bold',
+                                textAlign: 'center'
+                            }}>{item.data.title}</Text>
+                            <Text style={{fontSize: 10, color: '#999', textAlign: 'center'}}>{item.data.slogan}</Text>
+                        </View>
+                        <Image style={{
+                            width: 30,
+                            height: 30,
+                            alignSelf: 'flex-end',
+                        }} source={require('../../../img/ic_action_share_grey.png')}/>
                     </View>
-                    <Image style={{
-                        width: 30,
-                        height: 30,
-                        alignSelf: 'flex-end',
-                    }} source={require('../../../img/ic_action_share_grey.png')}/>
-                </View>
+                </TouchableWithoutFeedback>
             </View>
         );
     }
@@ -154,7 +161,7 @@ export default class RecommendPage extends Component {
     _renderSectionHeader(item) {
         return (
             <View style={{backgroundColor: '#fff', flex: 1, justifyContent: 'center', padding: 20}}>
-                <View style={{flex: 1, height: 0.5,marginBottom:32, backgroundColor: '#EAEAEA'}}/>
+                <View style={{flex: 1, height: 0.5, marginBottom: 32, backgroundColor: '#EAEAEA'}}/>
                 <View style={[styles.horizontal, {paddingBottom: 16}]}>
                     <Text style={{
                         fontSize: 16,
@@ -166,32 +173,36 @@ export default class RecommendPage extends Component {
                         height: 30,
                     }} source={require('../../../img/ic_action_more_arrow_dark.png')}/>
                 </View>
-                <Image style={styles.imageCover} source={{uri: item.data.cover.feed}}/>
-                <View style={{
-                    flexDirection: 'row',
-                    alignItems: 'center',
-                    paddingTop: 8,
-                }}>
-                    <Image style={styles.avatar} source={{uri: item.data.author.icon}}/>
-                    <View style={{alignItems: 'flex-start', flex: 1, paddingLeft: 6,}}>
-                        <Text style={{
-                            fontSize: 13,
-                            color: '#333',
-                            fontWeight: 'bold',
-                            textAlign: 'center'
-                        }}>{item.data.title}</Text>
-                        <Text style={{
-                            fontSize: 10,
-                            color: '#999',
-                            textAlign: 'center'
-                        }}>{item.data.author.name + ' / # ' + item.data.category}</Text>
+                <TouchableWithoutFeedback onPress={() => this._onVideoItemClick(item)}>
+                    <Image style={styles.imageCover} source={{uri: item.data.cover.feed}}/>
+                </TouchableWithoutFeedback>
+                <TouchableWithoutFeedback onPress={() => this._onAuthorItemClick(item)}>
+                    <View style={{
+                        flexDirection: 'row',
+                        alignItems: 'center',
+                        paddingTop: 8,
+                    }}>
+                        <Image style={styles.avatar} source={{uri: item.data.author.icon}}/>
+                        <View style={{alignItems: 'flex-start', flex: 1, paddingLeft: 6,}}>
+                            <Text style={{
+                                fontSize: 13,
+                                color: '#333',
+                                fontWeight: 'bold',
+                                textAlign: 'center'
+                            }}>{item.data.title}</Text>
+                            <Text style={{
+                                fontSize: 10,
+                                color: '#999',
+                                textAlign: 'center'
+                            }}>{item.data.author.name + ' / # ' + item.data.category}</Text>
+                        </View>
+                        <Image style={{
+                            width: 30,
+                            height: 30,
+                            alignSelf: 'flex-end',
+                        }} source={require('../../../img/ic_action_share_grey.png')}/>
                     </View>
-                    <Image style={{
-                        width: 30,
-                        height: 30,
-                        alignSelf: 'flex-end',
-                    }} source={require('../../../img/ic_action_share_grey.png')}/>
-                </View>
+                </TouchableWithoutFeedback>
             </View>
         );
     }
@@ -220,16 +231,18 @@ export default class RecommendPage extends Component {
 
     _errorComponent = () => {
         return (
-            <View style={styles.emptyDataStyle}>
-                <Text style={{
-                          padding: 20,
-                          fontWeight: 'bold',
-                          color: '#333',
-                          fontSize: 13,
-                          textAlign: 'center',
-                          alignSelf: 'center'
-                      }}>数据加载异常</Text>
-            </View>);
+            <TouchableWithoutFeedback onPress={() => this._fetchData()}>
+                <View style={styles.emptyDataStyle}>
+                    <Text style={{
+                        padding: 20,
+                        fontWeight: 'bold',
+                        color: '#333',
+                        fontSize: 13,
+                        textAlign: 'center',
+                        alignSelf: 'center'
+                    }}>数据加载异常</Text>
+                </View>
+            </TouchableWithoutFeedback>);
     };
     _dataComponent = () => {
         return (
@@ -255,56 +268,58 @@ export default class RecommendPage extends Component {
      */
     _renderItem = ({item}) => {
         return (
-            <View
-                style={{
-                    flexDirection: 'row',
-                    backgroundColor: '#fff',
-                    flex: 1,
-                    paddingLeft: 20,
-                    paddingRight: 20,
-                    paddingTop: 6,
-                    paddingBottom: 6,
-                }}>
-                <Image style={{
-                    width: 130,
-                    height: 70,
-                    resizeMode: "stretch",
-                    borderRadius: 8,
-                }} source={{uri: item.data.cover.feed}}/>
-                <View style={{
-                    paddingTop: 8,
-                    paddingLeft: 8,
-                    flex: 1,
-                }}>
-                    <Text numberOfLines={2}
-                          style={{
-                              flexWrap: 'wrap',
-                              fontSize: 13,
-                              color: '#333',
-                              fontWeight: 'bold',
-                              flex:1,
-                          }}>{item.data.title}</Text>
-                    <View style={{
+            <TouchableWithoutFeedback onPress={() => this._onVideoItemClick(item)}>
+                <View
+                    style={{
                         flexDirection: 'row',
-                        alignItems: 'center',
+                        backgroundColor: '#fff',
                         flex: 1,
-                        paddingLeft: 6,
+                        paddingLeft: 20,
+                        paddingRight: 20,
+                        paddingTop: 6,
+                        paddingBottom: 6,
                     }}>
-                        <Text numberOfLines={1}
+                    <Image style={{
+                        width: 130,
+                        height: 70,
+                        resizeMode: "stretch",
+                        borderRadius: 8,
+                    }} source={{uri: item.data.cover.feed}}/>
+                    <View style={{
+                        paddingTop: 8,
+                        paddingLeft: 8,
+                        flex: 1,
+                    }}>
+                        <Text numberOfLines={2}
                               style={{
-                                  fontSize: 10,
-                                  color: '#999',
+                                  flexWrap: 'wrap',
+                                  fontSize: 13,
+                                  color: '#333',
+                                  fontWeight: 'bold',
                                   flex: 1,
-                              }}>{'#' + item.data.category + ' / ' + item.data.author.name}</Text>
-                        <Image style={{
-                            width: 30,
-                            height: 30,
-                            alignSelf: 'flex-end',
-                        }} source={require('../../../img/ic_action_share_grey.png')}/>
-                    </View>
+                              }}>{item.data.title}</Text>
+                        <View style={{
+                            flexDirection: 'row',
+                            alignItems: 'center',
+                            flex: 1,
+                            paddingLeft: 6,
+                        }}>
+                            <Text numberOfLines={1}
+                                  style={{
+                                      fontSize: 10,
+                                      color: '#999',
+                                      flex: 1,
+                                  }}>{'#' + item.data.category + ' / ' + item.data.author.name}</Text>
+                            <Image style={{
+                                width: 30,
+                                height: 30,
+                                alignSelf: 'flex-end',
+                            }} source={require('../../../img/ic_action_share_grey.png')}/>
+                        </View>
 
+                    </View>
                 </View>
-            </View>
+            </TouchableWithoutFeedback>
         );
     };
 
@@ -366,7 +381,13 @@ export default class RecommendPage extends Component {
         }
     }
 
-    _onItemClick(item){
+    _onVideoItemClick = (item) => {
+        let {navigate} = this.props.navigator;
+        navigate('VideoDetailPage', {data: item})
+    };
 
+    _onAuthorItemClick(item) {
+        let {navigate} = this.props.navigator;
+        navigate('AuthorDetailPage', {data: item})
     }
 }

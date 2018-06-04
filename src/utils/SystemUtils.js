@@ -17,7 +17,11 @@ export default class SystemUtils extends Component {
         return Dimensions.get('window').width;
     }
 
-    static isAndroidStytem() {
+    static getScreenHeight() {
+        return Dimensions.get('window').height;
+    }
+
+    static isAndroidSystem() {
         return Platform.OS === 'android';
     }
 }

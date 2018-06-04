@@ -1,14 +1,17 @@
 import React from "react";
 import {AppRegistry, YellowBox, Image} from 'react-native';
-import {createBottomTabNavigator} from 'react-navigation';
+import {createBottomTabNavigator, createStackNavigator} from 'react-navigation';
 import HomePage from './src/view/home/HomePage';
 import ProfilePage from './src/view/profile/ProfilePage';
 import NotifyPage from "./src/view/notify/NotifyPage";
 import FocusPage from "./src/view/focus/FocusPage";
+import SplashPage from './src/view/splash/SplashPage';
+import VideoDetailPage from "./src/view/detail/VideoDetail/VideoDetailPage";
+import AuthorDetailPage from "./src/view/detail/VideoDetail/AuthorDetailPage";
 
 YellowBox.ignoreWarnings(['Warning: isMounted(...) is deprecated', 'Module RCTImageLoader']);
 
-const Eyepetizer = createBottomTabNavigator({
+const Home = createBottomTabNavigator({
     Home: {
         screen: HomePage,
         navigationOptions: {
@@ -87,6 +90,25 @@ const Eyepetizer = createBottomTabNavigator({
     },
 });
 
+
+const Eyepetizer = createStackNavigator(
+    {
+        Splash: {
+            screen: SplashPage
+        },
+        Home: {
+            screen: Home
+        },
+        VideoDetailPage: {
+            screen: VideoDetailPage
+        },
+        AuthorDetailPage: {
+            screen: AuthorDetailPage
+        }
+    }, {
+        headerMode: 'none',
+    }
+);
 
 //  // 在 rn 中不能 require 一个变量。uri 需要写一个网络地址，或者是 file:// 地址。
 //
