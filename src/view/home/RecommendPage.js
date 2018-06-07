@@ -5,11 +5,9 @@ import {
     Image,
     ActivityIndicator,
     SectionList,
-    ViewPagerAndroid,
     TouchableWithoutFeedback,
 } from 'react-native'
-import Swiper from 'react-native-swiper'
-import SystemUtils from '../../utils/SystemUtils';
+import Swiper from 'react-native-swiper';
 
 
 const styles = {
@@ -20,12 +18,6 @@ const styles = {
     horizontal: {
         flexDirection: 'row',
         alignItems: 'center',
-    },
-    horizontalTopTab: {
-        flexDirection: 'row',
-        alignItems: 'center',
-        backgroundColor: '#EAEAEA',
-        justifyContent: 'center'
     },
     header: {
         backgroundColor: '#fff',
@@ -117,7 +109,7 @@ export default class RecommendPage extends Component {
                         activeDot={<View style={styles.activityDotStyle}/>}
                         paginationStyle={{
                             top: 180, bottom: null,
-                        }} autoplay={true} loop={true}>
+                        }} autoplay={false} loop={false}>
                     {this.state.headerArray.map(this._renderBannerItem.bind(this))}
                 </Swiper>
             </View>
@@ -325,10 +317,13 @@ export default class RecommendPage extends Component {
 
 
     _fetchData() {
-        this.setState({
-            refreshing: true,
-            error: false,
-        });
+        if (this.state.isRefreshing) {
+            return;
+        }
+        // this.setState({
+        //     isRefreshing: true,
+        //     error: false,
+        // });
         fetch(baseUrl)
             .then((response) => response.json())
             .then((json) => {
@@ -381,13 +376,12 @@ export default class RecommendPage extends Component {
         }
     }
 
-    _onVideoItemClick = (item) => {
+    _onVideoItemClick(item) {
         let {navigate} = this.props.navigator;
         navigate('VideoDetailPage', {data: item})
     };
 
     _onAuthorItemClick(item) {
-        let {navigate} = this.props.navigator;
-        navigate('AuthorDetailPage', {data: item})
+        this.props.navigator.navigate('AuthorDetailPage', {data: item})
     }
 }

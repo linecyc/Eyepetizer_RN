@@ -1,23 +1,45 @@
-import React, {Component} from 'react';
-import Navigation from '../../navigation/Navigation';
-import Demo from "../Demo";
+import ProductionPage from "./ProductionPage";
+import DynamicPage from "./DynamicPage";
+import {createMaterialTopTabNavigator} from "react-navigation";
 
 /**
  *
  * @author by linecy.
  */
-
-export default class FocusPage extends Component {
-
-    render() {
-        return (<Navigation navConfig={focusConfig}/>);
+const routeConfigs = {
+    ProductionPage: {
+        screen: ProductionPage,
+        navigationOptions: ({navigation}) => ({
+            tabBarLabel: '作品',
+            title: "我的ddd",
+        })
+    },
+    DynamicPage: {
+        screen: DynamicPage,
+        navigationOptions: ({navigation}) => ({
+            tabBarLabel: '动态',
+            title: "我的",
+        })
     }
-}
-
-const focusConfig = {
-    title: 'Subscription',
-    labArray: [Demo, Demo],
-    labNameArray: ['作品', '动态'],
-    backText: '发布作品',
-    navigationStyle: 0
 };
+
+const navConfigs = {
+    lazy: true,
+    tabBarOptions: {
+        activeTintColor: '#333',
+        inactiveTintColor: '#999',
+        style: {
+            backgroundColor: '#EAEAEA',
+        },
+        indicatorStyle: {
+            backgroundColor: '#000',
+        },
+        labelStyle: {
+            fontSize: 14,
+            fontWeight: 'bold',
+        },
+    },
+};
+
+
+export default createMaterialTopTabNavigator(routeConfigs, navConfigs);

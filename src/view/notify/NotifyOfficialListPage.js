@@ -129,7 +129,10 @@ export default class NotifyListPage extends PureComponent {
             return;
         }
         if (!this.state.isRefreshing) {
-            this.state.isRefreshing = true;
+            // this.setState({
+            //     isRefreshing: true,
+            //     error: false,
+            // });
 
             this.timer = setTimeout(() => {
 

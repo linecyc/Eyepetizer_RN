@@ -4,6 +4,8 @@ import {
     Text,
 } from 'react-native';
 
+import {Video} from 'react-native-video';
+
 
 /**
  *
@@ -14,13 +16,12 @@ export default class AuthorDetailPage extends Component {
 
     constructor(props) {
         super(props);
-        this.title = props.title;
-        console.info(this.props.data)
+        this.data = props.navigation.state.params.data;
     }
 
     render() {
         return (<View style={styles.container}>
-            <Text style={styles.context}>哈哈哈</Text>
+            <Text style={styles.context}>作者详情</Text>
         </View>);
     }
 }

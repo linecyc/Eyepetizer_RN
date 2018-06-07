@@ -6,10 +6,7 @@ import {
     FlatList,
     TouchableWithoutFeedback,
     ViewPagerAndroid,
-    BackHandler,
-    ToastAndroid,
-} from 'react-native'
-import SystemUtils from '../../utils/SystemUtils';
+} from 'react-native';
 import HomeEmptyPage from "./HomeEmptyPage";
 import RecommendPage from "./RecommendPage";
 
@@ -116,28 +113,6 @@ export default class HomePage extends Component {
         this.fatList.scrollToIndex({viewPosition: 0.5, index: p});
     };
 
-
-    _onBackPressed() {
-        if (this.lastTime && this.lastTime + 1500 >= Date.now()) {
-            return false;
-        }
-        this.lastTime = Date.now();
-        ToastAndroid.show('再按一次退出应用', ToastAndroid.SHORT);
-        return true;
-    };
-
-    componentWillMount() {
-        if (SystemUtils.isAndroidSystem()) {
-            BackHandler.addEventListener('hardwareBackPress', this._onBackPressed);
-        }
-    }
-
-
-    componentWillUnmount() {
-        if (SystemUtils.isAndroidSystem()) {
-            BackHandler.removeEventListener('hardwareBackPress', this._onBackPressed);
-        }
-    }
 
     /**
      * ViewPagerAndroid的子View 需要是<View/>

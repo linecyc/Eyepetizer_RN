@@ -3,12 +3,10 @@ import {
     View,
     Image,
     ImageBackground,
-    BackHandler,
     Text,
     Animated,
 } from 'react-native';
-
-import SystemUtils from '../../../src/utils/SystemUtils';
+import {NavigationActions, StackActions} from 'react-navigation';
 
 /**
  *
@@ -27,23 +25,15 @@ export default class Splash extends Component {
         }
     }
 
-
-    componentWillMount() {
-        if (SystemUtils.isAndroidSystem()) {
-            BackHandler.addEventListener('hardwareBackPress', () => true);
-        }
-    }
-
-    componentWillUnmount() {
-        if (SystemUtils.isAndroidSystem()) {
-            BackHandler.removeEventListener('hardwareBackPress', () => true);
-        }
-        this.animation && this.animation.stop();
-    }
-
+    /**不退回闪屏页的方法：
+     * 方法一：dispatch,同时不需要navigate,不然会打开两个页面，然后销毁一个，体验不好
+     * 方法二：SwitchNavigator,详见index.js.
+     * @private
+     */
     _goHome() {
-        const {navigate} = this.props.navigation;
-        navigate('Home');
+        // const {navigate} = this.props.navigation;
+        // navigate('Home');
+        this.props.navigation.dispatch(resetAction);
     }
 
     /**
@@ -101,6 +91,15 @@ export default class Splash extends Component {
     }
 }
 
+//设置新路由的第0个路由为Home
+//StackActions替代NavigationActions
+
+const resetAction = StackActions.reset({
+    index: 0,
+    actions: [
+        NavigationActions.navigate({routeName: 'Home'}),
+    ],
+});
 
 const styles = {
     chinese: {

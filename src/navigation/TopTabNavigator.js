@@ -21,44 +21,23 @@ const NavigatorStyle = {
     ONLY_TITLE: 3
 };
 
-export default class Navigate extends Component {
+export default class TopTabNavigator extends Component {
 
     constructor(props) {
         super(props);
         if (typeof props.navConfig === 'undefined') {
             console.error('Navigation config must be set for init');
         }
+        if (typeof props.navConfig.routeConfigs === 'undefined') {
+            console.error('Navigation route config must be set for init');
+        }
         this.navigatorStyle = props.navConfig.navigatorStyle;
         this.backText = props.navConfig.backText;
         this.title = props.navConfig.title;
-        this.labArray = props.navConfig.labArray;
-        this.labNameArray = props.navConfig.labNameArray;
-        if (typeof props.initialRoute === 'undefined') {
-            this.initialRoute = "First";
-        } else {
-            this.initialRoute = props.navConfig.initialRoute;
-        }
+        this.routeConfigs = props.navConfig.routeConfigs;
 
-        if (props.navConfig.labArray.length !== 2 || props.navConfig.labArray.length !== props.navConfig.labNameArray.length) {
-            console.error('The same length as labNameArray and labArray,and length equals 2');
-        }
-
-        this.routeConfigs = {
-            First: {
-                screen: this.labArray[0],
-                navigationOptions: ({navigation}) => ({
-                    tabBarLabel: this.labNameArray[0],
-                })
-            },
-            Second: {
-                screen: this.labArray[1],
-                navigationOptions: ({navigation}) => ({
-                    tabBarLabel: this.labNameArray[1],
-                })
-            }
-        };
         this.navConfigs = {
-            initialRouteName: this.initialRoute,
+            //initialRouteName: this.initialRoute,
             lazy: true,
             tabBarOptions: {
                 activeTintColor: '#333',
@@ -78,7 +57,11 @@ export default class Navigate extends Component {
         };
     }
 
-    _renderDefaultNavigator = () => {
+    _renderNavigator = () => {
+
+    };
+
+    render() {
         let Up = null;
         let Down = null;
         switch (this.navigatorStyle) {
@@ -131,10 +114,6 @@ export default class Navigate extends Component {
             </View>
             <Nav/>
         </View>);
-    };
-
-    render() {
-        return this._renderDefaultNavigator();
     }
 
 
