@@ -1,5 +1,14 @@
 import React, {Component} from 'react';
-import {Image, Text, View, ScrollView, TouchableHighlight} from 'react-native';
+import {
+    Image,
+    Text,
+    View,
+    ScrollView,
+    TouchableHighlight,
+    TouchableWithoutFeedback,
+    NativeModules,
+    ToastAndroid,
+} from 'react-native';
 
 
 /**
@@ -8,15 +17,54 @@ import {Image, Text, View, ScrollView, TouchableHighlight} from 'react-native';
  */
 
 export default class ProfilePage extends Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            isLogin: false,
+            accountName: null,
+        }
+    }
 
+    //TouchableHighlight跳转时会报一个超时未取消的错？
+    //Attempted to transition from state `RESPONDER_INACTIVE_PRESS_IN` to `RESPONDER_ACTIVE_LONG_PRESS_IN`, which is not supported.
+    //This is most likely due to `Touchable.longPressDelayTimeout` not being cancelled.
     render() {
         return (
             <View style={styles.container}>
                 <View style={styles.header}>
                     <Image style={styles.menu} source={require('../../../img/ic_menu_more.png')}/>
-                    <Image style={styles.avatar} source={require('../../../img/ic_avatar.jpg')}/>
-                    <Text style={styles.userName}>小明与小花</Text>
-                    <Text>查看个人主页 ></Text>
+                    <TouchableWithoutFeedback onPress={() => {
+                        if (!this.state.isLogin) {
+                            NativeModules
+                                .IntentModule
+                                .startActivityForResultFromJS("com.eyepetizer_rn.ui.account.LoginRegisterActivity", null)
+                                .then((data) => JSON.parse(data))
+                                .then((data) => {
+                                    this.setState({
+                                        isLogin: true,
+                                        accountName: data.accountName,
+                                    });
+                                })
+                                .catch((e) => {
+                                    console.info(e);
+                                });
+                        } else {
+                            ToastAndroid.show('点击了跳转个人主页', ToastAndroid.SHORT);
+                        }
+                    }}>
+                        <Image style={styles.avatar}
+                               source={this.state.isLogin ? require('../../../img/ic_avatar.jpg') : require('../../../img/account_default_avatar.png')}/>
+                    </TouchableWithoutFeedback>
+                    {this.state.isLogin ? <View>
+                        <Text style={styles.userName}>{this.state.accountName}</Text>
+                        <TouchableWithoutFeedback onPress={() => {
+                            ToastAndroid.show('点击了跳转个人主页', ToastAndroid.SHORT);
+                        }}>
+                            <View>
+                                <Text>查看个人主页 ></Text>
+                            </View>
+                        </TouchableWithoutFeedback>
+                    </View> : <Text style={{padding: 16, color: '#666', fontSize: 12,}}>点击登录后可评论</Text>}
                     <View style={styles.horizontal}>
                         <View style={styles.horizontalControl}>
                             <Image style={styles.menu} source={require('../../../img/ic_grey_heart.png')}/>
@@ -71,13 +119,14 @@ const styles = {
             borderRadius: 45,
             //borderColor:'#666',
             //borderWidth:1,
-            resizeMode:'cover',
+            resizeMode: 'cover',
         },
         userName: {
             color: '#333',
             fontSize: 16,
             fontWeight: 'bold',
             margin: 16,
+            textAlign:'center'
         },
         horizontal: {
             flexDirection: 'row',

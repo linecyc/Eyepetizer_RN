@@ -71,7 +71,7 @@ export default class ProductionPage extends Component {
                         headerArray: [],
                         dataArray: [],
                     });
-                    console.error(e);
+                    console.info(e);
                 });
         }
     }

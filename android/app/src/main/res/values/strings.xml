@@ -1,3 +1,19 @@
 <resources>
-    <string name="app_name">Eyepetizer_RN</string>
+  <string name="app_name">Eyepetizer_RN</string>
+  <string name="find_psw">找回密码</string>
+  <string name="login_info">登录后即可关注作者，\n发表评论，同步喜欢视频和播放记录</string>
+  <string name="register_edit_phone_hint">请输入手机号</string>
+  <string name="register_edit_captcha_hint">请输入验证码</string>
+  <string name="register_edit_password_hint">请输入最少6位密码</string>
+  <string name="get_captcha">获取验证码</string>
+  <string name="login_edit_phone_hint">请输入邮箱地址/手机号</string>
+  <string name="login_edit_password_hint">请输入密码</string>
+  <string name="login">登录</string>
+  <string name="register">注册</string>
+  <string name="login_register">用户注册</string>
+  <string name="register_login">用户登录</string>
+  <string name="author_login">作者登录</string>
+  <string name="accept_agreement_for_use_app">登录或注册即同意开眼&#160;</string>
+  <string name="user_agreement">用户服务协议</string>
+  <string name="login_bottom_detail">仅支持中国大陆手机号注册，\n其他区域用户请联系客服help@epepetizer.net</string>
 </resources>

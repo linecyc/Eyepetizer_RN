@@ -39,6 +39,7 @@ export default class TopTabNavigator extends Component {
         this.navConfigs = {
             //initialRouteName: this.initialRoute,
             lazy: true,
+            backBehavior: 'none',
             tabBarOptions: {
                 activeTintColor: '#333',
                 inactiveTintColor: '#999',

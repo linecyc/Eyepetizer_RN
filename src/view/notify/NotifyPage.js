@@ -28,6 +28,7 @@ const routeConfigs = {
 
 const navConfigs = {
     lazy: true,
+    backBehavior:'none',
     tabBarOptions: {
         activeTintColor: '#333',
         inactiveTintColor: '#999',

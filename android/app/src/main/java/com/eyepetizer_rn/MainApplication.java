@@ -2,6 +2,7 @@ package com.eyepetizer_rn;
 
 import android.app.Application;
 
+import com.eyepetizer_rn.ui.rn.IntentReactPackage;
 import com.facebook.react.ReactApplication;
 import com.github.yamill.orientation.OrientationPackage;
 import com.brentvatne.react.ReactVideoPackage;
@@ -26,7 +27,8 @@ public class MainApplication extends Application implements ReactApplication {
       return Arrays.<ReactPackage>asList(
           new MainReactPackage(),
           new OrientationPackage(),
-          new ReactVideoPackage()
+          new ReactVideoPackage(),
+          new IntentReactPackage()
       );
     }
 

@@ -357,7 +357,7 @@ export default class RecommendPage extends Component {
                 headerArray: [],
                 dataArray: [],
             });
-            console.error(e);
+            console.info(e);
         });
 
     };
