@@ -366,6 +366,17 @@ export default class RecommendPage extends Component {
         this._fetchData();
     }
 
+    /**
+     * 有焦点才更新？
+     * 对于tabNavigator嵌套viewPagerAndroid，当滚动到有viewPagerAndroid时，滑动viewPagerAndroid不会刷新？？
+     * @param nextProps 接下来的属性
+     * @param nextState 接下来的状态
+     * @returns {*|boolean} 是否更新
+     */
+    shouldComponentUpdate(nextProps, nextState) {
+        return nextProps.navigator.isFocused();
+    }
+
     render() {
         if (this.state.isFirst) {
             return this._loadingComponent();

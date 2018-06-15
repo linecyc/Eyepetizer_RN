@@ -4,7 +4,7 @@ import {
     Image,
     ImageBackground,
     Text,
-    Animated,
+    Animated, StatusBar,
 } from 'react-native';
 import {NavigationActions, StackActions} from 'react-navigation';
 
@@ -65,6 +65,7 @@ export default class Splash extends Component {
     render() {
         return (
             <View style={{flex: 1}}>
+                <StatusBar hidden={true}/>
                 <Animated.View style={{
                     flex: 1,
                     transform: [{scaleX: this.state.scale}, {scaleY: this.state.scale}],

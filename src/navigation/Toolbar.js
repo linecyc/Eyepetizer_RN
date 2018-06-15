@@ -10,9 +10,7 @@ import {createMaterialTopTabNavigator} from "react-navigation";
 
 
 /**
- *通过引入createMaterialTopTabNavigator后，在调用TopTabNavigator，
- * 生命周期：先加载，在卸载，最后加载??
- *
+ *This is base top toolbar.
  * @author by linecy.
  */
 
@@ -21,54 +19,25 @@ const NO_CONTAINER_UP = 1;
 const NO_CONTAINER_DOWN = 2;
 const ONLY_TITLE = 3;
 
-export default class TopTabNavigator extends Component {
+export default class Toolbar extends Component {
 
     constructor(props) {
         super(props);
-        if (typeof props.navConfig === 'undefined') {
-            console.error('Navigation config must be set for init');
+        if (typeof props.barConfigs === 'undefined') {
+            console.error('Toolbar config must be set for init at ToolBar.js');
         }
-        if (typeof props.navConfig.routeConfigs === 'undefined') {
-            console.error('Navigation route config must be set for init');
-        }
-        this.navigationStyle = props.navConfig.navigationStyle;
-        this.backText = props.navConfig.backText;
-        this.title = props.navConfig.title;
-        this.routeConfigs = props.navConfig.routeConfigs;
-
-        this.navConfigs = {
-            //initialRouteName: this.initialRoute,
-            lazy: true,
-            backBehavior: 'none',
-            tabBarOptions: {
-                activeTintColor: '#333',
-                inactiveTintColor: '#999',
-                style: {
-                    backgroundColor: '#EAEAEA',
-                },
-                indicatorStyle: {
-                    //修改width其实是indicator（其实是一个View），导致没有办法居中
-                    backgroundColor: '#000',
-                },
-                labelStyle: {
-                    fontSize: 14,
-                    fontWeight: 'bold',
-                },
-            },
-        };
+        this.navigationStyle = props.barConfigs.navigationStyle;
+        this.backText = props.barConfigs.backText;
+        this.title = props.barConfigs.title;
     }
 
     render() {
-        let Nav = createMaterialTopTabNavigator(this.routeConfigs, this.navConfigs);
-        return (<View style={styles.container}>
-            <View style={styles.horizontal}>
-                <View style={{position: 'absolute', left: 0, right: 0, top: 0,}}>
-                    <Text style={styles.title}>{this.title}</Text>
-                </View>
-                {this._renderUp()}
-                {this._renderDown()}
+        return (<View style={styles.horizontal}>
+            <View style={{position: 'absolute', left: 0, right: 0, top: 0,}}>
+                <Text style={styles.title}>{this.title}</Text>
             </View>
-            <Nav/>
+            {this._renderUp()}
+            {this._renderDown()}
         </View>);
     }
 
@@ -100,9 +69,6 @@ export default class TopTabNavigator extends Component {
 
 
 const styles = {
-    container: {
-        flex: 1,
-    },
     horizontal: {
         flexDirection: 'row',
         backgroundColor: '#EAEAEA',

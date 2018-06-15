@@ -6,7 +6,7 @@ import {
     ImageBackground,
     FlatList,
 } from 'react-native';
-import VideoPlayer from "./VideoPlayer";
+import VideoPlayer from "../../videoPlayer/VideoPlayer";
 
 import Orientation from 'react-native-orientation';
 

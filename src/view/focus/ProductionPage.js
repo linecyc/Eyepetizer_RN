@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import {ActivityIndicator, FlatList, Image, SectionList, Text, TouchableWithoutFeedback, View} from 'react-native';
+import NavigationService from "../../navigation/NavigationService";
 
 
 /**
@@ -260,12 +261,14 @@ export default class ProductionPage extends Component {
     };
 
     _onVideoItemClick(item) {
-        this.props.navigation.navigate('VideoDetailPage', {data: item});
+        //this.props.navigation.navigate('VideoDetailPage', {data: item});
+        NavigationService.navigate('VideoDetailPage', {data: item});
     };
 
     _onAuthorItemClick = (item) => {
-        let {navigate} = this.props.navigation;
-        navigate('AuthorDetailPage', {data: item})
+        //let {navigate} = this.props.navigation;
+        //navigate('AuthorDetailPage', {data: item})
+        NavigationService.navigate('AuthorDetailPage', {data: item});
     }
 }
 

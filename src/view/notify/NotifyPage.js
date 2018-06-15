@@ -1,4 +1,7 @@
+import React, {Component} from "react";
 import {createMaterialTopTabNavigator} from "react-navigation";
+import Toolbar from "../../navigation/Toolbar";
+import {View} from "react-native";
 import NotifyOfficialListPage from "./NotifyOfficialListPage";
 import NotifyOtherListPage from "./NotifyOtherListPage";
 /**
@@ -25,10 +28,9 @@ const routeConfigs = {
         })
     }
 };
-
 const navConfigs = {
     lazy: true,
-    backBehavior:'none',
+    backBehavior: 'none',
     tabBarOptions: {
         activeTintColor: '#333',
         inactiveTintColor: '#999',
@@ -45,4 +47,17 @@ const navConfigs = {
     },
 };
 
-export default createMaterialTopTabNavigator(routeConfigs, navConfigs);
+const notifyConfig = {
+    title: 'Notification',
+    navigationStyle: 1
+};
+const Nav = createMaterialTopTabNavigator(routeConfigs, navConfigs);
+
+export default class NotifyPage extends Component {
+    render() {
+        return (<View style={{flex: 1}}>
+            <Toolbar barConfigs={notifyConfig}/>
+            <Nav navigat={this.props.navigation}/>
+        </View>);
+    }
+}

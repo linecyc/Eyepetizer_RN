@@ -1,11 +1,12 @@
 import React, {Component} from "react";
-import {Image, ToastAndroid, BackHandler} from 'react-native';
+import {Image, ToastAndroid, BackHandler, View,} from 'react-native';
 import {
     createBottomTabNavigator,
     createStackNavigator,
-    createSwitchNavigator
+    createSwitchNavigator,
+    createMaterialTopTabNavigator,
 } from 'react-navigation';
-import HomePage from './src/view/home/HomePage';
+import MainPage from './src/view/home/HomePage';
 import ProfilePage from './src/view/profile/ProfilePage';
 import NotifyPage from "./src/view/notify/NotifyPage";
 import FocusPage from "./src/view/focus/FocusPage";
@@ -13,21 +14,24 @@ import SplashPage from './src/view/splash/SplashPage';
 import VideoDetailPage from "./src/view/detail/VideoDetail/VideoDetailPage";
 import AuthorDetailPage from "./src/view/detail/VideoDetail/AuthorDetailPage";
 import SystemUtils from "./src/utils/SystemUtils";
+import NavigationService from "./src/navigation/NavigationService";
 
 
 //首页4 tab
-const Home = createBottomTabNavigator({
-    Home: {
-        screen: HomePage,
+//createBottomTabNavigator导致从其他页面切换回有viewPagerAndroid的页面时，滑动viewPagerAndroid卡顿
+//createMaterialTopTabNavigator用这个代替后可解决,
+//但animationEnabled和swipeEnabled同时false时，viewPagerAndroid滑动会卡顿？？
+const Home = createMaterialTopTabNavigator({
+    Main: {
+        screen: MainPage,
         navigationOptions: {
             tabBarLabel: '首页',
             tabBarIcon: ({focused, tintColor}) => (
                 <Image
                     source={focused ? require('./img/ic_tab_home_selected.png') : require('./img/ic_tab_home.png')}
-                    style={{width: 26, height: 26, tintColor: tintColor}}
+                    style={{width: 24, height: 24, tintColor: tintColor}}
                 />
             ),
-
         }
 
     },
@@ -38,10 +42,9 @@ const Home = createBottomTabNavigator({
             tabBarIcon: ({focused, tintColor}) => (
                 <Image
                     source={focused ? require('./img/ic_tab_focus_selected.png') : require('./img/ic_tab_focus.png')}
-                    style={{width: 26, height: 26, tintColor: tintColor}}
+                    style={{width: 24, height: 24, tintColor: tintColor}}
                 />
             ),
-
         }
     },
     Notify: {
@@ -51,10 +54,9 @@ const Home = createBottomTabNavigator({
             tabBarIcon: ({focused, tintColor}) => (
                 <Image
                     source={focused ? require('./img/ic_tab_notify_selected.png') : require('./img/ic_tab_notify.png')}
-                    style={{width: 26, height: 26, tintColor: tintColor}}
+                    style={{width: 24, height: 24, tintColor: tintColor}}
                 />
             ),
-
         }
     },
     My: {
@@ -64,7 +66,7 @@ const Home = createBottomTabNavigator({
             tabBarIcon: ({focused, tintColor}) => (
                 <Image
                     source={focused ? require('./img/ic_tab_profile_selected.png') : require('./img/ic_tab_profile.png')}
-                    style={{width: 26, height: 26, tintColor: tintColor}}
+                    style={{width: 24, height: 24, tintColor: tintColor}}
                 />
             ),
         }
@@ -84,13 +86,12 @@ const Home = createBottomTabNavigator({
         },
         style: {
             backgroundColor: '#fff', // TabBar 背景色
-            //margin: 5,
-            // height: 44
+            justifyContent: 'center',
+            height: 60,
         },
         labelStyle: {
             fontSize: 14, // 文字大小
-            // flex: 1,
-            // justifyContent: 'center',
+            flex: 1,
         },
     },
 });
@@ -128,19 +129,24 @@ export default class App extends Component {
 
     _onBackPressed() {
         const nav = this.navigator;
-        if (nav && nav.state.nav.routes.length > 1) {
-            nav.pop();
-            return true;//返回true表示消费该事件
-        } else if (nav.state.nav.routes[0].routeName === 'Home') {
-            if (this.lastTime && this.lastTime + 1500 >= Date.now()) {
-                return false;
+        if (nav) {
+            if (nav.state.nav.routes.length > 1) {
+                nav.pop();
+                return true;//返回true表示消费该事件
+            } else if (nav.state.nav.routes[0].routeName === 'Home') {
+                if (this.lastTime && this.lastTime + 1500 >= Date.now()) {
+                    return BackHandler.exitApp();
+                    //return false;
+                }
+                this.lastTime = Date.now();
+                ToastAndroid.show('再按一次退出应用', ToastAndroid.SHORT);
+                return true;
+            } else {
+                //闪屏页不可点击返回
+                return nav.state.nav.routes[0].routeName === 'Splash'
             }
-            this.lastTime = Date.now();
-            ToastAndroid.show('再按一次退出应用', ToastAndroid.SHORT);
-            return true;
         } else {
-            //闪屏页不可点击返回
-            return nav.state.nav.routes[0].routeName === 'Splash'
+            return false;
         }
 
     };
@@ -162,6 +168,7 @@ export default class App extends Component {
         return (
             <Eyepetizer ref={navigator => {
                 this.navigator = navigator;
+                NavigationService.setTopLevelNavigator(navigator);
             }}/>
         );
     }

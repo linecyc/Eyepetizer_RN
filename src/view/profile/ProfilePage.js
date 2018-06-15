@@ -25,6 +25,10 @@ export default class ProfilePage extends Component {
         }
     }
 
+    shouldComponentUpdate(nextProps, nextState) {
+        return nextProps.navigation.isFocused();
+    }
+
     //TouchableHighlight跳转时会报一个超时未取消的错？
     //Attempted to transition from state `RESPONDER_INACTIVE_PRESS_IN` to `RESPONDER_ACTIVE_LONG_PRESS_IN`, which is not supported.
     //This is most likely due to `Touchable.longPressDelayTimeout` not being cancelled.
@@ -60,8 +64,8 @@ export default class ProfilePage extends Component {
                         <TouchableWithoutFeedback onPress={() => {
                             ToastAndroid.show('点击了跳转个人主页', ToastAndroid.SHORT);
                         }}>
-                            <View>
-                                <Text>查看个人主页 ></Text>
+                            <View style={{justifyContent:'center'}}>
+                                <Text style={{textAlign: 'center'}}>查看个人主页 ></Text>
                             </View>
                         </TouchableWithoutFeedback>
                     </View> : <Text style={{padding: 16, color: '#666', fontSize: 12,}}>点击登录后可评论</Text>}
@@ -93,58 +97,57 @@ export default class ProfilePage extends Component {
 
 
 const styles = {
-        container: {
-            flex: 1,
-        },
-        header: {
-            backgroundColor: '#EAEAEA',
-            alignItems: 'center',
-            paddingBottom: 16,
-        },
-        scrollView: {
-            paddingTop: 20,
-            justifyContent: 'space-around',
-            alignItems: 'center',
-            backgroundColor: '#fff',
-            //showsVerticalScrollIndicator: false,//不支持
-        },
-        menu: {
-            width: 40,
-            height: 40,
-            alignSelf: 'flex-end',
-        },
-        avatar: {
-            width: 80,
-            height: 80,
-            borderRadius: 45,
-            //borderColor:'#666',
-            //borderWidth:1,
-            resizeMode: 'cover',
-        },
-        userName: {
-            color: '#333',
-            fontSize: 16,
-            fontWeight: 'bold',
-            margin: 16,
-            textAlign:'center'
-        },
-        horizontal: {
-            flexDirection: 'row',
-        },
-        horizontalControl: {
-            flexDirection: 'row',
-            justifyContent: 'center',
-            alignItems: 'center',
-            flexGrow: 1,//相当于Android控件中的weight属性
-        },
-        divider: {
-            alignSelf: 'center',
-        },
-        listItem: {
-            flex: 1,
-            fontSize: 16,
-            color: '#333',
-            margin: 16,
-        }
+    container: {
+        flex: 1,
+    },
+    header: {
+        backgroundColor: '#EAEAEA',
+        alignItems: 'center',
+        paddingBottom: 16,
+    },
+    scrollView: {
+        paddingTop: 20,
+        justifyContent: 'space-around',
+        alignItems: 'center',
+        backgroundColor: '#fff',
+        //showsVerticalScrollIndicator: false,//不支持
+    },
+    menu: {
+        width: 40,
+        height: 40,
+        alignSelf: 'flex-end',
+    },
+    avatar: {
+        width: 80,
+        height: 80,
+        borderRadius: 45,
+        //borderColor:'#666',
+        //borderWidth:1,
+        resizeMode: 'cover',
+    },
+    userName: {
+        color: '#333',
+        fontSize: 16,
+        fontWeight: 'bold',
+        margin: 16,
+        textAlign: 'center'
+    },
+    horizontal: {
+        flexDirection: 'row',
+    },
+    horizontalControl: {
+        flexDirection: 'row',
+        justifyContent: 'center',
+        alignItems: 'center',
+        flexGrow: 1,//相当于Android控件中的weight属性
+    },
+    divider: {
+        alignSelf: 'center',
+    },
+    listItem: {
+        flex: 1,
+        fontSize: 16,
+        color: '#333',
+        margin: 16,
     }
-;
+};

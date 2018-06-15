@@ -16,7 +16,7 @@ export default class AuthorDetailPage extends Component {
 
     constructor(props) {
         super(props);
-        this.data = props.navigation.state.params.data;
+        //this.data = props.navigation.state.params.data;
     }
 
     render() {

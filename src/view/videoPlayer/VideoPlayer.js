@@ -11,7 +11,7 @@ import {
 
 import Video from 'react-native-video';
 import Orientation from 'react-native-orientation';
-import SystemUtils from "../../../utils/SystemUtils";
+import SystemUtils from "../../utils/SystemUtils";
 
 /**
  *视频播放器
@@ -109,7 +109,7 @@ export default class VideoPlayer extends Component {
                             this._onBackOrMinScreen();
                         }}>
                             <Image style={styles.imageButton35}
-                                   source={this.state.isFullScreen ? require('../../../../img/ic_action_min_screen.png') : require('../../../../img/ic_action_detail_back.png')}/>
+                                   source={this.state.isFullScreen ? require('../../../img/ic_action_min_screen.png') : require('../../../img/ic_action_detail_back.png')}/>
                         </TouchableWithoutFeedback>
                         {this.state.isFullScreen ? <Text style={{
                             position: 'absolute',
@@ -121,11 +121,11 @@ export default class VideoPlayer extends Component {
                         <View
                             style={[styles.horizontal, {position: 'absolute', right: 0, top: 5, alignItems: 'center'}]}>
                             <Image style={styles.imageButton35}
-                                   source={require('../../../../img/ic_action_favorites.png')}/>
+                                   source={require('../../../img/ic_action_favorites.png')}/>
                             <Image style={styles.imageButton35}
-                                   source={require('../../../../img/ic_action_share.png')}/>
+                                   source={require('../../../img/ic_action_share.png')}/>
                             <Image style={styles.imageButton35}
-                                   source={require('../../../../img/ic_menu_more_white.png')}/>
+                                   source={require('../../../img/ic_menu_more_white.png')}/>
                         </View>
                         <View style={[styles.horizontal, {
                             flex: 1,
@@ -135,14 +135,14 @@ export default class VideoPlayer extends Component {
                             <TouchableWithoutFeedback onPressIn={() => this._clearTimeOut()}
                                                       onPressOut={() => this._onPlay(!this.state.isPlaying)}>
                                 <Image style={styles.imageButton60}
-                                       source={this.state.isPlaying ? require('../../../../img/ic_player_pause.png') : require('../../../../img/ic_player_play.png')}/>
+                                       source={this.state.isPlaying ? require('../../../img/ic_player_pause.png') : require('../../../img/ic_player_play.png')}/>
                             </TouchableWithoutFeedback>
                         </View>
                         {this.state.isFullScreen ? null : <TouchableWithoutFeedback onPress={() => {
                             this._onFullScreen()
                         }}>
                             <Image style={[styles.imageButton35, {alignSelf: 'flex-end'}]}
-                                   source={require('../../../../img/ic_action_full_screen.png')}/>
+                                   source={require('../../../img/ic_action_full_screen.png')}/>
                         </TouchableWithoutFeedback>}
 
                         <Slider
@@ -165,12 +165,12 @@ export default class VideoPlayer extends Component {
                             }}
                             onSlidingComplete={(value) => {
                                 //结束时回调
+                                this.videoPlayer.seek(value);
                                 this.setState({
                                     currentTime: value,
                                     isPlaying: true,
                                     showCover: false,
                                 });
-                                this.videoPlayer.seek(value);
                                 this._clearTimeOut();
                             }}
                         />
@@ -281,6 +281,7 @@ export default class VideoPlayer extends Component {
      * @param play 需要播放还是暂停
      * @private
      */
+    //fixme 关键帧拖动问题，不然拖动无效？
     _onPlay(play) {
         this.setState({
             isPlaying: play,
